@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                
+    <!-- Inhalt für den Platzhalter "content" aus layout.xhtml -->            
+    <ui:define name="content">
+        <h2>Testläufe</h2>
+
+        <h:form>
+        	<!-- Neuen Testlauf anlegen -->
+            <div class="panel">
+                <h3>Testlauf anlegen</h3>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <h:outputLabel for="name" value="Name" />
+                        <h:inputText id="name" value="#{testRunPageBean.testRun.name}" required="true" />
+                    </div>
+                    <div class="form-field">
+                        <h:outputLabel for="plannedDate" value="Geplantes Datum" />
+                        <h:inputText id="plannedDate" value="#{testRunPageBean.testRun.plannedDate}">
+                            <f:convertDateTime pattern="dd.MM.yyyy" />
+                        </h:inputText>
+                    </div>
+                    <div class="form-field">
+                        <h:outputLabel for="status" value="Status" />
+                        <h:selectOneMenu id="status" value="#{testRunPageBean.testRun.status}">
+                            <f:selectItems value="#{testRunPageBean.statuses}" var="status" itemValue="#{status}" itemLabel="#{status.label}" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <p:commandButton value="Testlauf speichern" action="#{testRunPageBean.saveRun}" styleClass="btn" ajax="false" />
+            </div>
+
+			<!-- Testfall einem Testlauf zuordnen -->
+            <div class="panel">
+                <h3>Testfälle zuordnen</h3>
+                <div class="inline-form">
+                    <div class="form-field">
+                        <h:outputLabel for="testRunId" value="Testlauf" />
+                        <h:selectOneMenu id="testRunId" value="#{testRunPageBean.testRunId}">
+                            <f:selectItem itemLabel="Bitte wählen" itemValue="#{null}" />
+                            <f:selectItems value="#{testRunPageBean.testRuns}" var="run" itemValue="#{run.id}" itemLabel="#{run.name}" />
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-field">
+                        <h:outputLabel for="testCaseId" value="Testfall" />
+                        <h:selectOneMenu id="testCaseId" value="#{testRunPageBean.testCaseId}">
+                            <f:selectItem itemLabel="Bitte wählen" itemValue="#{null}" />
+                            <f:selectItems value="#{testRunPageBean.testCases}" var="testCase" itemValue="#{testCase.id}" itemLabel="#{testCase.title}" />
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-field">
+                        <h:outputLabel for="testerId" value="Tester:in" />
+                        <h:selectOneMenu id="testerId" value="#{testRunPageBean.testerId}">
+                            <f:selectItem itemLabel="Bitte wählen" itemValue="#{null}" />
+                            <f:selectItems value="#{testRunPageBean.testers}" var="tester" itemValue="#{tester.id}" itemLabel="#{tester.fullName}" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <p:commandButton value="Zuordnung speichern" action="#{testRunPageBean.assign}" styleClass="btn" ajax="false" />
+            </div>
+
+			<!-- Vorhandene Testläufe werden als Tabelle dargestellt. -->
+            <div class="panel">
+                <h3>Vorhandene Testläufe</h3>
+                <h:dataTable value="#{testRunPageBean.testRuns}" var="run" styleClass="data-table">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{run.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        #{run.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Datum</f:facet>
+                        <h:outputText value="#{run.plannedDate}">
+                            <f:convertDateTime pattern="dd.MM.yyyy" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Status</f:facet>
+                        #{run.status.label}
+                    </h:column>
+                </h:dataTable>
+            </div>
+
+			<!-- Alle Zuordnungen werden als Tabelle dargestellt. -->
+            <div class="panel">
+                <h3>Zuordnungen</h3>
+                <h:dataTable value="#{testRunPageBean.assignments}" var="assignment" styleClass="data-table">
+                    <h:column>
+                        <f:facet name="header">Testlauf</f:facet>
+                        #{assignment.testRun.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Testfall</f:facet>
+                        #{assignment.testCase.title}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Tester:in</f:facet>
+                        #{assignment.tester.fullName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Ergebnis</f:facet>
+                        #{assignment.resultStatus.label}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

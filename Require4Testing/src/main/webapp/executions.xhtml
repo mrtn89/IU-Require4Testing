@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                
+    <!-- Inhalt für den Platzhalter "content" aus layout.xhtml -->
+    <ui:define name="content">
+        <h2>Ergebnisse erfassen</h2>
+
+        <h:form>
+        	<!-- Filterbereich: Tester-Auswahl zum Filtern der Ausführungsliste -->
+            <div class="panel">
+                <div class="inline-form">
+                    <div class="form-field">
+                        <h:outputLabel for="testerId" value="Tester:in filtern" />
+                        <h:selectOneMenu id="testerId" value="#{executionPageBean.testerId}">
+                            <f:selectItem itemLabel="Alle" itemValue="#{null}" />
+                            <f:selectItems value="#{executionPageBean.testers}" var="tester" itemValue="#{tester.id}" itemLabel="#{tester.fullName}" />
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-field">
+                        <p:commandButton value="Liste aktualisieren" styleClass="btn" ajax="false" />
+                    </div>
+                </div>
+            </div>
+			
+			<!-- Ausführungsliste: Iteration über alle (gefilterten) Testausführungen -->
+            <div class="panel">
+                <ui:repeat value="#{executionPageBean.executions}" var="execution">
+                    <div class="panel">
+                        <h3>#{execution.testRun.name} · #{execution.testCase.title}</h3>
+                        <p>
+                            <strong>Tester:in:</strong> #{execution.tester.fullName}<br />
+                            <strong>Anforderung:</strong> #{execution.testCase.requirement.title}<br />
+                            <strong>Erwartetes Ergebnis:</strong> #{execution.testCase.expectedResult}
+                        </p>
+                        
+                        <!-- Eingabefelder: Ergebnis-Dropdown und Kommentar -->
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <h:outputLabel for="result#{execution.id}" value="Ergebnis" />
+                                <h:selectOneMenu id="result#{execution.id}" value="#{execution.resultStatus}">
+                                    <f:selectItems value="#{executionPageBean.results}" var="result" itemValue="#{result}" itemLabel="#{result.label}" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="form-field" style="grid-column: 1 / -1;">
+                                <h:outputLabel for="comment#{execution.id}" value="Kommentar" />
+                                <h:inputTextarea id="comment#{execution.id}" value="#{execution.comment}" />
+                            </div>
+                        </div>
+                        <p>
+                        
+                        <!-- Status-Anzeige: farblich je nach Ergebnis -->
+                            Aktueller Status:
+                            <h:outputText rendered="#{execution.resultStatus.name() eq 'BESTANDEN'}" styleClass="result-bestanden" value="#{execution.resultStatus.label}" />
+                            <h:outputText rendered="#{execution.resultStatus.name() eq 'FEHLGESCHLAGEN'}" styleClass="result-fehlgeschlagen" value="#{execution.resultStatus.label}" />
+                            <h:outputText rendered="#{execution.resultStatus.name() eq 'OFFEN'}" styleClass="result-offen" value="#{execution.resultStatus.label}" />
+                        </p>
+                        
+                        <!-- Speichern: übergibt das jeweilige Execution-Objekt an die Bean -->
+                        <p:commandButton value="Ergebnis speichern" action="#{executionPageBean.save(execution)}" styleClass="btn" ajax="false" />
+                    </div>
+                </ui:repeat>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

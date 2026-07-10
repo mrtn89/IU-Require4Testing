@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+      
+<!-- Kopf aller Seiten: Titel, CSS -->
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Require4Testing</title>
+    <h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+    <div id="holder">
+    <!-- Header: Logo + Rollenauswahl -->
+        <header>
+            <div class="callout">Require4Testing</div>
+            <h:form styleClass="role-selector">
+                <label for="role">Aktive Rolle:</label>
+                <h:selectOneMenu id="role" value="#{appBean.selectedRole}">
+                    <f:selectItems value="#{appBean.availableRoles}" var="role" itemLabel="#{role}" itemValue="#{role}"
+                                   xmlns:f="http://xmlns.jcp.org/jsf/core" />
+                </h:selectOneMenu>
+                <p:commandButton value="Rolle wählen" action="#{appBean.applyRole}" styleClass="btn" ajax="false" />
+            </h:form>
+        </header>
+
+		<!-- Navigation: Verweise auf alle Seiten -->
+        <nav>
+            <ul>
+                <li><h:link outcome="/overview.xhtml" value="Übersicht" /></li>
+                <li><h:link outcome="/requirements.xhtml" value="Anforderungen" /></li>
+                <li><h:link outcome="/testcases.xhtml" value="Testfälle" /></li>
+                <li><h:link outcome="/testruns.xhtml" value="Testläufe" /></li>
+                <li><h:link outcome="/testers.xhtml" value="Tester:innen" /></li>
+                <li><h:link outcome="/executions.xhtml" value="Ergebnisse" /></li>
+            </ul>
+        </nav>
+
+		<!-- Hauptbereich: Messages + Platzhalter für Seiteninhalt -->
+        <main>
+            <p:messages id="messages" showDetail="false" closable="true" />
+            <div class="info-box">
+                Aktive Rolle im Frontend: <strong>#{appBean.selectedRole}</strong>
+            </div>
+            
+            <!-- Platzhalter: Hier fügt jede Seite ihren Inhalt über
+                 <ui:define name="content"> ein -->
+            <ui:insert name="content" />
+            
+        </main>
+
+		<!-- Footer -->
+        <footer>IU14141637 | Martin Funke</footer>
+    </div>
+</h:body>
+</html>

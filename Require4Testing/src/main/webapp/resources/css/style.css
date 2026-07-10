@@ -1,0 +1,554 @@
+/*! HTML5 Boilerplate v9.0.0-RC1 | MIT License | https://html5boilerplate.com/ */
+
+/* main.css 3.0.0 | MIT License | https://github.com/h5bp/main.css#readme */
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+  resize: vertical;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+   *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    color: white;
+    background-color: gainsboro;
+    font-family: Georgia, "Times New Roman", Times, serif;
+  }
+
+  body, .callout, nav ul {
+    margin: 0;
+  }
+
+  #holder {
+    background-color: #f4f5f7;
+    min-width: 20rem;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 1);
+    border-radius: 0.4em;
+  }
+
+  header {
+    background-color: #ffffff;
+  }
+
+  .role-selector {
+    padding-left: 0.2rem;
+  }
+
+  .callout {
+    font-weight: bold;
+    font-size: 1.4rem;
+    padding: 0.5rem;
+    color: #0d7a7a;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color:#000;
+  }
+
+  /* Styles für die Navigations Buttons */
+  .active {
+    text-decoration: underline;
+  }
+
+  nav {
+    display:flex;
+    justify-content: center;
+  }
+
+  nav ul {
+    padding: 0.4rem;
+    display: flex;
+  }
+
+  nav ul li {
+    list-style-type: none;
+    margin: 0 0.2rem; 
+    text-align: center;
+  }
+
+  nav ul a {      
+    display: inline-block;
+    padding: 0.2rem;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #0d7a7a;
+    border-radius: 0.2rem;
+  }
+
+  nav a:hover {
+    background-color: #0a6363;
+  }
+
+  #highlight a {
+    color: red
+  }
+  /* Ende Button Styling */
+
+  main {
+  padding: 0 0.4rem;
+  }
+
+  .kpi-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+    .kpi-box {
+        background-color: #e6edf3;
+        border: 1px solid #d2d7dc;
+        border-radius: 0.3rem;
+        padding: 0.5rem 1rem;
+        min-width: 120px;
+        text-align: center;
+        }
+    .kpi-label { font-size: 0.78rem; color: #6b7280; text-transform: uppercase; }
+    .kpi-value { font-size: 1.6rem; font-weight: bold; color: #000000; }
+    .kpi-value-success {color: #16a34a}
+    .kpi-value-error {color: #dc2626}
+
+    /* Schnellstart */
+    .action-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    }
+
+    .btn {
+    display: inline-block;
+    padding: 0.35rem 0.8rem;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    /* color: #e6edf3; */
+    color: #000000;
+   /* background-color: #21262d; */
+    border: 1px solid #30363d;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    cursor: pointer;
+    }
+
+    .btn:hover {
+   /* background-color: #30363d; */
+    background-color: #c0bfbc;
+    border-color: #8b949e;
+    }
+
+
+footer {
+  text-align: right;
+  width: 100%;
+  padding: 0.5rem;
+  border-top: 1px solid white;
+  color: #30363d
+}
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide visually and from screen readers
+ */
+
+.hidden,
+[hidden] {
+  display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  /* 1 */
+}
+
+/*
+ * Extends the .visually-hidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+.visually-hidden.focusable:active,
+.visually-hidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  white-space: inherit;
+  width: auto;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+.invisible {
+  visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * The use of `table` rather than `block` is only necessary if using
+ * `::before` to contain the top-margins of child elements.
+ */
+
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+}
+
+.clearfix::after {
+  clear: both;
+}
+
+/* ==========================================================================
+   Angepasste Styles für große Monitore
+   ========================================================================== */
+
+   @media screen and (min-width: 45em) {
+
+    #holder {
+      display: flex;
+      flex-wrap: wrap;
+      width:75%;
+      max-width: 65rem;
+      margin: 0 auto;
+    }
+
+    header {
+      width:100%;
+    }
+
+    .callout {
+      font-size: 1.8rem;
+      padding: 0.8rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    nav {
+      flex-basis: 25%;
+      padding: 0.5rem;
+    }
+
+     /* Styles für die Navigations Buttons */
+    nav ul {
+      padding: 0.1rem;
+      flex-direction: column;
+      flex:1;
+    }
+
+    nav ul a {
+      width: 90%;
+      margin: 0.4rem;
+      padding: 0.5rem;
+    }
+     /* Ende der Styles für Buttons */
+
+    main {
+      flex: 1;
+      padding: 0 1rem;
+      border-left: 1px solid;
+    }
+
+
+}
+
+
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   https://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: #fff !important;
+    color: #000 !important;
+    /* Black prints faster */
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]::after {
+    content: " (" attr(title) ")";
+  }
+
+  /*
+   * Don't show links that are fragment identifiers,
+   * or use the `javascript:` pseudo protocol
+   */
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after {
+    content: "";
+  }
+
+  pre {
+    white-space: pre-wrap !important;
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+
+
+
+/* ==========================================================================
+Require4Testing additions
+========================================================================== */
+
+body {
+  color: #222;
+}
+
+main h2, main h3, main p, main label, main th, main td, main li, main span {
+  color: #222;
+}
+
+main a, nav a {
+  text-decoration: none;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #d2d7dc;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 0.45rem;
+  border: 1px solid #c6ccd3;
+  border-radius: 0.25rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #222;
+  background: #fff;
+}
+
+.form-field textarea {
+  min-height: 7rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #d2d7dc;
+  padding: 0.45rem;
+  vertical-align: top;
+  color: #222;
+}
+
+.data-table th {
+  text-align: left;
+  background: #e6edf3;
+}
+
+.data-table tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.inline-form .form-field {
+  min-width: 220px;
+  flex: 1;
+}
+
+.info-box {
+  background: #eef6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+  padding: 0.75rem;
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: #e6edf3;
+  color: #111827;
+  font-size: 0.85rem;
+}
+
+.result-bestanden {
+  color: #15803d;
+  font-weight: bold;
+}
+
+.result-fehlgeschlagen {
+  color: #b91c1c;
+  font-weight: bold;
+}
+
+.result-offen {
+  color: #92400e;
+  font-weight: bold;
+}
+
+footer {
+  color: #30363d;
+}

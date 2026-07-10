@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <!-- Inhalt für den Platzhalter "content" aus layout.xhtml -->
+    <ui:define name="content">
+        <h2>Übersicht</h2>
+
+		<!-- Kennzahlen aus OverviewBean -->
+        <div class="kpi-grid">
+            <div class="kpi-box">
+                <div class="kpi-label">Anforderungen</div>
+                <div class="kpi-value">#{overviewBean.requirementCount}</div>
+            </div>
+            <div class="kpi-box">
+                <div class="kpi-label">Testfälle</div>
+                <div class="kpi-value">#{overviewBean.testCaseCount}</div>
+            </div>
+            <div class="kpi-box">
+                <div class="kpi-label">Testläufe</div>
+                <div class="kpi-value">#{overviewBean.testRunCount}</div>
+            </div>
+            <div class="kpi-box">
+                <div class="kpi-label">Bestanden</div>
+                <div class="kpi-value kpi-value-success">#{overviewBean.passedCount}</div>
+            </div>
+            <div class="kpi-box">
+                <div class="kpi-label">Fehlgeschlagen</div>
+                <div class="kpi-value kpi-value-error">#{overviewBean.failedCount}</div>
+            </div>
+        </div>
+
+		<!-- Schnellstart: Direktlinks zu den Erfassungsseiten -->
+        <div class="panel">
+            <h2>Schnellstart</h2>
+            <div class="action-bar">
+                <h:link outcome="/requirements.xhtml" value="+ Anforderung erstellen" styleClass="btn" />
+                <h:link outcome="/testcases.xhtml" value="+ Testfall erstellen" styleClass="btn" />
+                <h:link outcome="/testruns.xhtml" value="+ Testlauf anlegen" styleClass="btn" />
+            </div>
+        </div>
+
+		<!-- Tabelle: Letzte Anforderungen -->
+        <div class="panel">
+            <h2>Letzte Anforderungen</h2>
+            <h:dataTable value="#{overviewBean.requirements}" var="requirement" styleClass="data-table">
+                <h:column>
+                    <f:facet xmlns:f="http://xmlns.jcp.org/jsf/core" name="header">ID</f:facet>
+                    #{requirement.id}
+                </h:column>
+                <h:column>
+                    <f:facet xmlns:f="http://xmlns.jcp.org/jsf/core" name="header">Titel</f:facet>
+                    #{requirement.title}
+                </h:column>
+                <h:column>
+                    <f:facet xmlns:f="http://xmlns.jcp.org/jsf/core" name="header">Priorität</f:facet>
+                    #{requirement.priority.label}
+                </h:column>
+                <h:column>
+                    <f:facet xmlns:f="http://xmlns.jcp.org/jsf/core" name="header">Status</f:facet>
+                    #{requirement.status.label}
+                </h:column>
+            </h:dataTable>
+        </div>
+
+		<!-- Tabelle mit letzten Zuordnungen -->
+        <div class="panel">
+            <h2>Letzte Zuordnungen</h2>
+            <h:dataTable value="#{overviewBean.executions}" var="execution" styleClass="data-table">
+                <h:column>
+                    <f:facet xmlns:f="http://xmlns.jcp.org/jsf/core" name="header">Testlauf</f:facet>
+                    #{execution.testRun.name}
+                </h:column>
+                <h:column>
+                    <f:facet xmlns:f="http://xmlns.jcp.org/jsf/core" name="header">Testfall</f:facet>
+                    #{execution.testCase.title}
+                </h:column>
+                <h:column>
+                    <f:facet xmlns:f="http://xmlns.jcp.org/jsf/core" name="header">Tester:in</f:facet>
+                    #{execution.tester.fullName}
+                </h:column>
+                <h:column>
+                    <f:facet xmlns:f="http://xmlns.jcp.org/jsf/core" name="header">Ergebnis</f:facet>
+                    #{execution.resultStatus.label}
+                </h:column>
+            </h:dataTable>
+        </div>
+    </ui:define>
+</ui:composition>
