@@ -25,6 +25,10 @@ Maven-Webprojekt für Java 8, JSF 2.2, PrimeFaces 8, JPA/Hibernate, CDI, MySQL 8
    mysql -u <benutzername> -p < sql/create-database.sql
    ```
 3. Datenbank Benutzer und Passwort sind in src/main/resources/META-INF/persistence.xml zu finden.
+4. In sql/database_dump kann die Datenbank vorbefüllt eingespielt werden.
+  ```sql
+   mysql -u <benutzername> -p !OePeUI57462# < sql/database_dump/require4testing_dump.sql
+   ```
 
 ## Projekt importieren
 
