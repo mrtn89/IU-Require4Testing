@@ -33,14 +33,14 @@ Maven-Webprojekt für Java 8, JSF 2.2, PrimeFaces 8, JPA/Hibernate, CDI, MySQL 8
 3. Das Projektverzeichnis auswählen und den Import abschließen.
 4. Falls erforderlich: Rechtsklick auf das Projekt → **Maven → Update Project**.
 
-5. ## TomEE konfigurieren
+## TomEE konfigurieren
 
 1. In Eclipse die Ansicht **Servers** öffnen.
 2. Über **New → Server** einen Apache-TomEE-Server hinzufügen.
 3. Das lokale TomEE-Installationsverzeichnis auswählen.
 4. Das Projekt `require4testing` dem Server hinzufügen.
 
-5. ## Anwendung starten
+## Anwendung starten
 
 1. Den TomEE-Server in Eclipse starten.
 2. Prüfen, ob das Projekt erfolgreich auf TomEE veröffentlicht wurde.
