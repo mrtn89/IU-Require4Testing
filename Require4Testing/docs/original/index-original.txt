@@ -1,1 +1,0 @@
-Die ursprüngliche index.html wurde aus dem Projekt entfernt, um HTML-Validator-Meldungen in Eclipse zu vermeiden. Inhalt siehe Version v1.
